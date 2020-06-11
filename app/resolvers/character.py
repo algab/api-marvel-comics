@@ -10,14 +10,10 @@ from app.utils.keys import generate_keys
 
 def list_characters(limit, offset):
     timestamp, public_key, hash = generate_keys()
-    if limit != None and offset != None:
+    if offset != None:
         response = requests.get('http://gateway.marvel.com/v1/public/characters?limit={}&offset={}&ts={}&apikey={}&hash={}'.format(limit,offset,timestamp, public_key, hash))
-    elif limit != None:
-        response = requests.get('http://gateway.marvel.com/v1/public/characters?limit={}&ts={}&apikey={}&hash={}'.format(limit,timestamp, public_key, hash))
-    elif offset != None:
-        response = requests.get('http://gateway.marvel.com/v1/public/characters?offset={}&ts={}&apikey={}&hash={}'.format(offset,timestamp, public_key, hash))
     else:
-        response = requests.get('http://gateway.marvel.com/v1/public/characters?ts={}&apikey={}&hash={}'.format(timestamp, public_key, hash))
+        response = requests.get('http://gateway.marvel.com/v1/public/characters?limit={}&ts={}&apikey={}&hash={}'.format(limit,timestamp, public_key, hash))
     if response.status_code == 200:
         characters = []
         for data in response.json()['data']['results']:
@@ -31,7 +27,7 @@ def list_characters(limit, offset):
     else:
         return None
 
-def search_character(id):
+def search_character(root, info, id):
     timestamp, public_key, hash = generate_keys()
     response = requests.get('http://gateway.marvel.com/v1/public/characters/{}?ts={}&apikey={}&hash={}'.format(id,timestamp, public_key, hash))
     if response.status_code == 200:
@@ -97,9 +93,10 @@ def find_character_series(id, limit, offset):
             series.append(Series(
                 id=data['id'],
                 title=data['title'],
-                description=data['description'],
-                format=data['format'],
-                pageCount=data['pageCount']
+                rating=data['rating'],
+                type=data['type'],
+                startYear=data['startYear'],
+                endYear=data['endYear']
             ))
         return series
     else:
