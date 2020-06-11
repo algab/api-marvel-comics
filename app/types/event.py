@@ -6,3 +6,4 @@ class Event(graphene.ObjectType):
     description = graphene.String()
     start = graphene.String()
     end = graphene.String()
+    

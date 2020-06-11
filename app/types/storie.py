@@ -5,3 +5,4 @@ class Storie(graphene.ObjectType):
     title = graphene.String(required=True)
     description = graphene.String()
     type = graphene.String()
+    
