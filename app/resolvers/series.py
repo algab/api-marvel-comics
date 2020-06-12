@@ -5,7 +5,7 @@ from app.types.character import Character
 from app.types.comics import Comics
 from app.types.creator import Creator
 from app.types.event import Event
-from app.types.storie import Storie
+from app.types.story import Story
 
 from app.utils.keys import generate_keys
 
@@ -30,7 +30,7 @@ def list_series(limit, offset):
     else:
         return None
 
-def search_serie(root, info, id):
+def search_serie(id):
     timestamp, public_key, hash = generate_keys()
     response = requests.get('http://gateway.marvel.com/v1/public/series/{}?ts={}&apikey={}&hash={}'.format(id,timestamp, public_key, hash))
     if response.status_code == 200:
@@ -135,7 +135,7 @@ def find_serie_stories(id, limit, offset):
     if response.status_code == 200:
         stories = []
         for data in response.json()['data']['results']:
-            stories.append(Storie(
+            stories.append(Story(
                 id=data['id'],
                 title=data['title'],
                 description=data['description'],

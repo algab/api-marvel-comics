@@ -1,6 +1,6 @@
 import requests
 
-from app.types.storie import Storie
+from app.types.story import Story
 from app.types.character import Character
 from app.types.comics import Comics
 from app.types.creator import Creator
@@ -18,7 +18,7 @@ def list_stories(limit, offset):
     if response.status_code == 200:
         stories = []
         for data in response.json()['data']['results']:
-            stories.append(Storie(
+            stories.append(Story(
                 id=data['id'],
                 title=data['title'],
                 description=data['description'],
@@ -28,21 +28,21 @@ def list_stories(limit, offset):
     else:
         return None
 
-def search_storie(root, info, id):
+def search_storie(id):
     timestamp, public_key, hash = generate_keys()
     response = requests.get('http://gateway.marvel.com/v1/public/stories/{}?ts={}&apikey={}&hash={}'.format(id,timestamp, public_key, hash))
     if response.status_code == 200:
-        storie = response.json()['data']['results'][0]
-        return Storie(
-            id=storie['id'],
-            title=storie['title'],
-            description=storie['description'],
-            type=storie['type']
+        story = response.json()['data']['results'][0]
+        return Story(
+            id=story['id'],
+            title=story['title'],
+            description=story['description'],
+            type=story['type']
         )
     else:
         return None
 
-def find_storie_characters(id, limit, offset):
+def find_story_characters(id, limit, offset):
     timestamp, public_key, hash = generate_keys()
     if offset != None:
         response = requests.get('http://gateway.marvel.com/v1/public/stories/{}/characters?limit={}&offset={}&ts={}&apikey={}&hash={}'.format(id, limit, offset, timestamp, public_key, hash))
@@ -61,7 +61,7 @@ def find_storie_characters(id, limit, offset):
     else:
         return None
 
-def find_storie_comics(id, limit, offset):
+def find_story_comics(id, limit, offset):
     timestamp, public_key, hash = generate_keys()
     if offset != None:
         response = requests.get('http://gateway.marvel.com/v1/public/stories/{}/comics?limit={}&offset={}&ts={}&apikey={}&hash={}'.format(id, limit, offset, timestamp, public_key, hash))
@@ -81,7 +81,7 @@ def find_storie_comics(id, limit, offset):
     else:
         return None
 
-def find_storie_creators(id, limit, offset):
+def find_story_creators(id, limit, offset):
     timestamp, public_key, hash = generate_keys()
     if offset != None:
         response = requests.get('http://gateway.marvel.com/v1/public/stories/{}/creators?limit={}&offset={}&ts={}&apikey={}&hash={}'.format(id, limit, offset, timestamp, public_key, hash))
@@ -102,7 +102,7 @@ def find_storie_creators(id, limit, offset):
     else:
         return None        
 
-def find_storie_events(id, limit, offset):
+def find_story_events(id, limit, offset):
     timestamp, public_key, hash = generate_keys()
     if offset != None:
         response = requests.get('http://gateway.marvel.com/v1/public/stories/{}/events?limit={}&offset={}&ts={}&apikey={}&hash={}'.format(id, limit, offset, timestamp, public_key, hash))
@@ -122,7 +122,7 @@ def find_storie_events(id, limit, offset):
     else:
         return None                
 
-def find_storie_series(id, limit, offset):
+def find_story_series(id, limit, offset):
     timestamp, public_key, hash = generate_keys()
     if offset != None:
         response = requests.get('http://gateway.marvel.com/v1/public/stories/{}/series?limit={}&offset={}&ts={}&apikey={}&hash={}'.format(id, limit, offset, timestamp, public_key, hash))
