@@ -17,7 +17,7 @@ class QueryComics(ObjectType):
     comicsStories = List(Story, id=ID(required=True), limit=Int(required=True), offset=Int(), description="Fetches lists of stories filtered by a comic id")
 
     def resolve_comics(root, info, limit=None, offset=None):
-        return list_comics(limit, offset)
+        return resolve_comics.list_comics(limit, offset)
 
     def resolve_searchComics(root, info, id):
         return resolve_comics.search_comics(id)    
