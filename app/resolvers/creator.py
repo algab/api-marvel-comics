@@ -23,7 +23,8 @@ def list_creators(limit, offset):
                 middleName=data['middleName'],
                 lastName=data['lastName'],
                 suffix=data['suffix'],
-                fullName=data['fullName']
+                fullName=data['fullName'],
+                urls=data['urls']
             ))
         return creators    
     else:
@@ -40,8 +41,9 @@ def search_creator(id):
             middleName=creator['middleName'],
             lastName=creator['lastName'],
             suffix=creator['suffix'],
-            fullName=creator['fullName']
-        )    
+            fullName=creator['fullName'],
+            urls=creator['urls']
+        )
     else:
         return None
 
@@ -59,7 +61,8 @@ def find_creator_comics(id, limit, offset):
                 title=data['title'],
                 description=data['description'],
                 format=data['format'],
-                pageCount=data['pageCount']
+                pageCount=data['pageCount'],
+                urls=data['urls']
             ))
         return comics   
     else:
@@ -79,7 +82,8 @@ def find_creator_events(id, limit, offset):
                 title=data['title'],
                 description=data['description'],
                 start=data['start'],
-                end=data['end']
+                end=data['end'],
+                urls=data['urls']
             ))
         return events   
     else:
@@ -100,7 +104,8 @@ def find_creator_series(id, limit, offset):
                 rating=data['rating'],
                 type=data['type'],
                 startYear=data['startYear'],
-                endYear=data['endYear']
+                endYear=data['endYear'],
+                urls=data['urls']
             ))
         return series   
     else:

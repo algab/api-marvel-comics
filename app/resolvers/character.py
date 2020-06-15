@@ -55,7 +55,8 @@ def find_character_comics(id, limit, offset):
                 title=data['title'],
                 description=data['description'],
                 format=data['format'],
-                pageCount=data['pageCount']
+                pageCount=data['pageCount'],
+                urls=data['urls']
             ))
         return comics   
     else:
@@ -75,7 +76,8 @@ def find_character_events(id, limit, offset):
                 title=data['title'],
                 description=data['description'],
                 start=data['start'],
-                end=data['end']
+                end=data['end'],
+                urls=data['urls']
             ))
         return events   
     else:
@@ -96,7 +98,8 @@ def find_character_series(id, limit, offset):
                 rating=data['rating'],
                 type=data['type'],
                 startYear=data['startYear'],
-                endYear=data['endYear']
+                endYear=data['endYear'],
+                urls=data['urls']
             ))
         return series
     else:

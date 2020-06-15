@@ -22,7 +22,8 @@ def list_comics(limit, offset):
                 title=data['title'],
                 description=data['description'],
                 format=data['format'],
-                pageCount=data['pageCount']
+                pageCount=data['pageCount'],
+                urls=data['urls']
             ))
         return comics    
     else:
@@ -38,7 +39,8 @@ def search_comics(id):
             title=comics['title'],
             description=comics['description'],
             format=comics['format'],
-            pageCount=comics['pageCount']
+            pageCount=comics['pageCount'],
+            urls=comics['urls']
         )    
     else:
         return None
@@ -77,7 +79,8 @@ def find_comics_creators(id, limit, offset):
                 middleName=data['middleName'],
                 lastName=data['lastName'],
                 suffix=data['suffix'],
-                fullName=data['fullName']
+                fullName=data['fullName'],
+                urls=data['urls']
             ))
         return creators    
     else:
@@ -97,7 +100,8 @@ def find_comics_events(id, limit, offset):
                 title=data['title'],
                 description=data['description'],
                 start=data['start'],
-                end=data['end']
+                end=data['end'],
+                urls=data['urls']
             ))
         return events   
     else:
